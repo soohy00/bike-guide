@@ -16,7 +16,7 @@ export function RideList({ rides, actions }: { rides: Ride[]; actions: Actions }
   const monthSec = month.reduce((s, r) => s + r.durationSec, 0);
 
   return (
-    <div className="stack">
+    <div className="stack stagger">
       <TopBar title="주행" />
       <div className="row">
         <button className="btn primary grow" onClick={() => go('/rides/record')}>

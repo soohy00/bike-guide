@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import type { Actions } from '../App';
 import type { AppState } from '../types';
 import { findModel } from '../data/bikeModels';
@@ -12,7 +13,7 @@ import { Card, Chevron, DiyBadge, IconTile, StatusPill, TopBar, WearBar, km } fr
 export function PartList({ state }: { state: AppState }) {
   const list = byUrgency(allPartHealth(state, PARTS));
   return (
-    <div className="stack">
+    <div className="stack stagger">
       <TopBar title="부품" />
       <p className="muted">막대가 가득 차면 바꿀 때예요. 부품을 누르면 자세히 봐요.</p>
       {list.map((h) => (
@@ -133,7 +134,7 @@ export function PartDetail({ id, state, actions }: { id: string; state: AppState
                     <span className="pick-share">{share}%</span>
                   </div>
                   <div className="pick-bar">
-                    <div style={{ width: `${share}%` }} />
+                    <div style={{ '--fill': `${share}%` } as CSSProperties} />
                   </div>
                   <p className="muted small">
                     {product.price} · {product.tip}

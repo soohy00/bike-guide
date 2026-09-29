@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import { ChevronLeft, ChevronRight, Lightbulb, TriangleAlert, type LucideIcon } from 'lucide-react';
 import type { PartStatus } from '../lib/maintenance';
 import { go } from '../lib/router';
@@ -20,7 +20,7 @@ export function WearBar({ wear, status }: { wear: number; status: PartStatus }) 
   const pct = Math.min(100, Math.round(wear * 100));
   return (
     <div className="wearbar" role="meter" aria-valuemin={0} aria-valuemax={100} aria-valuenow={pct} aria-label="닳은 정도">
-      <div className={`wearbar-fill ${status}`} style={{ width: `${pct}%` }} />
+      <div className={`wearbar-fill ${status}`} style={{ '--fill': `${pct}%` } as CSSProperties} />
     </div>
   );
 }

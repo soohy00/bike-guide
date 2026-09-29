@@ -5,7 +5,7 @@ import { Card, Chevron, IconTile, TopBar, Tip } from '../components/ui';
 
 export function GuideList() {
   return (
-    <div className="stack">
+    <div className="stack stagger">
       <TopBar title="배우기" />
       <p className="muted">처음 타는 사람을 위한 짧은 수업이에요. 위에서부터 읽어요.</p>
       {GUIDES.map((g, i) => (

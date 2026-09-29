@@ -23,9 +23,15 @@
   부품·고장·수업 아이콘은 `src/data/*.ts`의 `icon`에 있어요. 네모 칸은 `IconTile`(`src/components/ui.tsx`)이에요.
 - 로고: `public/logo.webp` (사용자가 준 그림). 앱 아이콘 PNG(`icon-192`, `icon-512`, `apple-touch-icon`, `favicon`)는 이 그림으로 만들었어요.
   로고의 초록·갈색은 로고 안에서만 써요. UI 색으로 쓰지 마세요.
-- 모션: kinetics.colorion.co의 곡선을 써요 (`--ease-glide`, `--ease-spring`).
-  화면이 바뀔 때 = Stagger Entrance, 막대가 찰 때 = Elastic Progress, 카드를 누를 때 = Squish Button.
+- 모션: kinetics.colorion.co에서 가져왔어요. 곡선은 `--ease-glide` 1개만 써요 (튕기는 곡선은 쓰지 않아요).
+  목록 화면이 열릴 때 = Stagger Entrance (`.stack.stagger`에만), 막대가 찰 때 = Elastic Progress (`clip-path`, `--fill`),
+  카드를 누를 때 = Squish Button (0.98). `width`, `height`는 애니메이션하지 마세요.
   `prefers-reduced-motion`이면 모션을 꺼요.
+- impeccable 규칙 (사용자가 따르기로 정했어요):
+  - 제목 위에 작은 회색 글자(eyebrow)를 두지 마세요. 필요하면 제목 아래에 둬요.
+  - 큰 숫자 + 작은 이름표 모양(hero metric)을 쓰지 마세요.
+  - 카드나 경고 상자에 1px보다 두꺼운 왼쪽/오른쪽 색 선을 쓰지 마세요.
+  - 흐린 글자(placeholder, 탭 이름 등)도 대비 4.5:1 이상이어야 해요. `--ink-tertiary`는 글자에 쓰지 마세요.
 
 ## 프론트엔드 참고
 
@@ -46,6 +52,8 @@
    그다음 component.gallery에서 다른 디자인 시스템이 어떻게 만들었는지 봐요.
 3. 모션: kinetics.colorion.co에서 프롬프트나 React 코드를 가져와요.
 4. 다 했는데 어색하면 impeccable.style의 polish와 distill로 다듬어요.
+   스킬은 `.claude/skills/impeccable`에 있어요 (`/impeccable polish`, `/impeccable distill`).
+   UI를 바꾼 뒤에는 `.claude/skills/impeccable/scripts/impeccable detect --json <바꾼 파일>`을 1번 돌려요.
 
 ### 지켜야 할 것
 - 프로젝트에 이미 있는 디자인 시스템과 컴포넌트가 먼저예요.

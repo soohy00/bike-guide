@@ -55,7 +55,6 @@
 
   /* 모션: kinetics.colorion.co 의 곡선이에요 (DESIGN.md 에 모션이 없어요) */
   --ease-glide: cubic-bezier(0.16, 1, 0.3, 1); /* Stagger Entrance, Elastic Progress */
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* Squish Button: 놓을 때 */
   color-scheme: dark;
 }
 
@@ -75,6 +74,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
   word-break: keep-all;
+  caret-color: var(--primary);
+  scrollbar-color: var(--hairline-strong) var(--canvas);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--primary) 45%, transparent);
+  color: var(--ink);
 }
 
 h1,
@@ -91,7 +97,7 @@ h1 {
   letter-spacing: -0.6px;
 }
 
-/* eyebrow: 섹션 이름 */
+/* 섹션 이름 (h2) */
 h2 {
   font-size: 13px;
   font-weight: 500;
@@ -206,13 +212,14 @@ input {
   color: var(--ink);
 }
 
-/* 누르면 살짝 작아지고, 놓으면 튕기며 돌아와요 (kinetics: Squish Button) */
+/* 누르면 살짝 작아지고, 놓으면 부드럽게 돌아와요 (kinetics: Squish Button).
+   impeccable: 튕기는 곡선 대신 부드럽게 멈추는 곡선을 써요. */
 .card-button {
   cursor: pointer;
   transition:
     background 0.15s,
     border-color 0.15s,
-    transform 0.5s var(--ease-spring);
+    transform 0.4s var(--ease-glide);
 }
 
 .card-button:hover {
@@ -229,10 +236,10 @@ input {
     transform 0.08s ease-out;
 }
 
-/* card-title 을 모바일에 맞게 줄였어요 */
+/* card-title 을 모바일에 맞게 줄였어요 (body-lg 크기) */
 .card-title {
   margin: 0;
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 500;
   letter-spacing: -0.2px;
   color: var(--ink);
@@ -302,7 +309,7 @@ input {
 
 .btn.big {
   width: 100%;
-  font-size: 15px;
+  font-size: 16px;
   min-height: 48px;
 }
 
@@ -345,44 +352,20 @@ input {
 .home-head {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
+  gap: var(--s-sm);
   padding-top: var(--s-xs);
 }
 
-.eyebrow {
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.4px;
-  color: var(--ink-subtle);
-}
-
-/* product-screenshot-card */
-.card.odometer {
-  border-radius: var(--r-xl);
-}
-
-/* display-md */
-.odometer-value {
-  font-size: 40px;
-  font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: -1px;
-  font-variant-numeric: tabular-nums;
-}
-
-.odometer-value small {
-  font-size: 20px;
-  font-weight: 400;
-  color: var(--ink-subtle);
-  letter-spacing: -0.2px;
-  margin-left: var(--s-xxs);
+.home-head p {
+  margin-top: 2px;
 }
 
 .sos {
   transition:
     background 0.15s,
     border-color 0.15s,
-    transform 0.5s var(--ease-spring);
+    transform 0.4s var(--ease-glide);
   display: flex;
   align-items: center;
   gap: var(--s-sm);
@@ -401,6 +384,14 @@ input {
 .sos:hover {
   background: var(--surface-2);
   border-color: var(--hairline-strong);
+}
+
+.sos-sub {
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--ink-subtle);
 }
 
 .sos:active {
@@ -458,17 +449,21 @@ input {
   overflow: hidden;
 }
 
-/* 막대가 0 에서 차오르고 부드럽게 멈춰요 (kinetics: Elastic Progress) */
-.wearbar-fill {
+/* 막대가 0 에서 차오르고 부드럽게 멈춰요 (kinetics: Elastic Progress).
+   impeccable: width 대신 clip-path 로 움직여요. 레이아웃을 다시 계산하지 않아요.
+   --fill 은 WearBar 가 넣어요. */
+.wearbar-fill,
+.pick-bar div {
   height: 100%;
   border-radius: var(--r-pill);
-  transition: width 0.9s var(--ease-glide);
+  clip-path: inset(0 calc(100% - var(--fill, 0%)) 0 0 round var(--r-pill));
+  transition: clip-path 0.9s var(--ease-glide);
   animation: bar-fill 0.9s var(--ease-glide) 0.15s backwards;
 }
 
 @keyframes bar-fill {
   from {
-    width: 0;
+    clip-path: inset(0 100% 0 0 round var(--r-pill));
   }
 }
 
@@ -623,9 +618,7 @@ input {
 }
 
 .pick-bar div {
-  height: 100%;
   background: var(--ink-subtle);
-  animation: bar-fill 0.9s var(--ease-glide) 0.15s backwards;
 }
 
 /* Lists */
@@ -693,7 +686,7 @@ input {
 }
 
 .checklist label:has(input:checked) {
-  color: var(--ink-tertiary);
+  color: var(--ink-subtle);
   text-decoration: line-through;
 }
 
@@ -717,7 +710,7 @@ input {
 }
 
 .warning {
-  border-left: 2px solid var(--status-now);
+  border-color: color-mix(in srgb, var(--status-now) 45%, var(--hairline));
   color: var(--ink);
 }
 
@@ -859,7 +852,7 @@ input {
 }
 
 .field input::placeholder {
-  color: var(--ink-tertiary);
+  color: var(--ink-subtle);
 }
 
 .field input:focus {
@@ -884,7 +877,7 @@ input {
   width: 96px;
   height: 96px;
   margin-top: 12vh;
-  border-radius: 22px;
+  border-radius: var(--r-xl);
   box-shadow: 0 0 0 1px var(--hairline);
 }
 
@@ -911,7 +904,7 @@ input {
   transition:
     background 0.15s,
     border-color 0.15s,
-    transform 0.5s var(--ease-spring);
+    transform 0.4s var(--ease-glide);
   border: 1px solid var(--hairline);
   background: var(--surface-1);
   color: var(--ink);
@@ -998,7 +991,7 @@ input {
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  color: var(--ink-tertiary);
+  color: var(--ink-subtle);
   font-size: 12px;
   font-weight: 500;
   gap: 2px;
@@ -1021,7 +1014,7 @@ input {
 }
 
 .tab:hover {
-  color: var(--ink-subtle);
+  color: var(--ink-muted);
 }
 
 .tab.active {
@@ -1032,30 +1025,25 @@ input {
   transform: scaleX(1);
 }
 
-/* 화면이 바뀌면 카드가 하나씩 올라와요 (kinetics: Stagger Entrance) */
-.screen > .stack > *,
-.onboarding > * {
+/* 목록 화면이 열리면 카드가 하나씩 올라와요 (kinetics: Stagger Entrance).
+   impeccable: 같은 등장 모션을 모든 화면에 쓰지 않아요. 그래서 목록 화면(.stagger)에만 써요. */
+.stagger > * {
   animation: rise 0.45s var(--ease-glide) backwards;
 }
 
-.screen > .stack > :nth-child(2),
-.onboarding > :nth-child(2) {
+.stagger > :nth-child(2) {
   animation-delay: 40ms;
 }
-.screen > .stack > :nth-child(3),
-.onboarding > :nth-child(3) {
+.stagger > :nth-child(3) {
   animation-delay: 80ms;
 }
-.screen > .stack > :nth-child(4),
-.onboarding > :nth-child(4) {
+.stagger > :nth-child(4) {
   animation-delay: 120ms;
 }
-.screen > .stack > :nth-child(5),
-.onboarding > :nth-child(5) {
+.stagger > :nth-child(5) {
   animation-delay: 160ms;
 }
-.screen > .stack > :nth-child(n + 6),
-.onboarding > :nth-child(n + 6) {
+.stagger > :nth-child(n + 6) {
   animation-delay: 200ms;
 }
 

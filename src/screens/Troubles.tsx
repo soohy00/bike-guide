@@ -8,7 +8,7 @@ import { Card, Chevron, DiyBadge, IconTile, TopBar, Warning } from '../component
 
 export function TroubleList() {
   return (
-    <div className="stack">
+    <div className="stack stagger">
       <TopBar title="무엇이 문제예요?" />
       <p className="muted">보이는 문제를 골라요. 무엇이 필요한지 알려 줘요.</p>
       {TROUBLES.map((t) => (
