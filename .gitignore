@@ -2,3 +2,6 @@ node_modules
 dist
 *.tsbuildinfo
 .DS_Store
+
+# impeccable 실행 파일 (16MB). 처음 쓸 때 다시 내려받아요.
+.claude/skills/impeccable/scripts/bin/

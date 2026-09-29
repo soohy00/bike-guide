@@ -16,45 +16,16 @@ export default function Home({ state, currentKm }: { state: AppState; currentKm:
   const weekKm = state.rides.filter((r) => new Date(r.date).getTime() >= weekAgo).reduce((s, r) => s + r.distanceKm, 0);
 
   return (
-    <div className="stack">
+    <div className="stack stagger">
       <header className="home-head">
         <div>
-          <p className="eyebrow">{`${model.brand} ${model.name}`}</p>
           <h1>{bike.nickname || '내 자전거'}</h1>
+          <p className="muted small">{`${model.brand} ${model.name}`}</p>
         </div>
         <button className="icon-btn" onClick={() => go('/settings')} aria-label="설정">
           <Settings size={20} aria-hidden />
         </button>
       </header>
-
-      <Card className="odometer">
-        <p className="eyebrow">총 주행 거리</p>
-        <p className="odometer-value">
-          {Math.round(currentKm).toLocaleString('ko-KR')}
-          <small>km</small>
-        </p>
-        <p className="muted small">최근 7일 {km(weekKm, 1)}</p>
-        <div className="row">
-          <button className="btn primary grow" onClick={() => go('/rides/record')}>
-            <Play size={16} aria-hidden />
-            주행 기록
-          </button>
-          <button className="btn grow" onClick={() => go('/rides/new')}>
-            거리 입력
-          </button>
-        </div>
-      </Card>
-
-      <button className="sos" onClick={() => go('/help')}>
-        <IconTile icon={LifeBuoy} />
-        <span className="grow">
-          자전거가 고장 났어요
-          <span className="muted small" style={{ display: 'block', fontWeight: 400 }}>
-            증상을 고르면 필요한 것을 알려 줘요
-          </span>
-        </span>
-        <Chevron />
-      </button>
 
       <h2>할 일</h2>
       {todo.length === 0 ? (
@@ -80,6 +51,38 @@ export default function Home({ state, currentKm }: { state: AppState; currentKm:
           </Card>
         ))
       )}
+
+      <h2>주행</h2>
+      <Card>
+        <dl className="facts">
+          <div>
+            <dt>최근 7일</dt>
+            <dd>{km(weekKm, 1)}</dd>
+          </div>
+          <div>
+            <dt>총 주행 거리</dt>
+            <dd>{km(currentKm)}</dd>
+          </div>
+        </dl>
+        <div className="row">
+          <button className="btn primary grow" onClick={() => go('/rides/record')}>
+            <Play size={16} aria-hidden />
+            주행 기록
+          </button>
+          <button className="btn grow" onClick={() => go('/rides/new')}>
+            거리 입력
+          </button>
+        </div>
+      </Card>
+
+      <button className="sos" onClick={() => go('/help')}>
+        <IconTile icon={LifeBuoy} />
+        <span className="grow">
+          자전거가 고장 났어요
+          <span className="sos-sub">증상을 고르면 필요한 것을 알려 줘요</span>
+        </span>
+        <Chevron />
+      </button>
 
       <h2>오늘 타기 전에</h2>
       <Card onClick={() => go('/learn/pre-ride')}>

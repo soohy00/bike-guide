@@ -2,7 +2,6 @@ import { useState } from 'react';
 import type { Actions } from '../App';
 import type { AppState } from '../types';
 import { findModel } from '../data/bikeModels';
-import { go } from '../lib/router';
 import { Card, TopBar, km } from '../components/ui';
 import Onboarding from './Onboarding';
 
@@ -75,10 +74,6 @@ export default function Settings({ state, actions, currentKm }: { state: AppStat
           모든 기록 지우기
         </button>
       </Card>
-
-      <button className="btn link" onClick={() => go('/')}>
-        홈으로
-      </button>
     </div>
   );
 }
