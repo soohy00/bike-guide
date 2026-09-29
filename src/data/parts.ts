@@ -1,7 +1,9 @@
+import { Cable, CircleDot, Cog, Droplet, Link, OctagonMinus, Ribbon, Wrench, type LucideIcon } from 'lucide-react';
+
 export interface PartDef {
   id: string;
   name: string;
-  emoji: string;
+  icon: LucideIcon;
   /** 이 부품이 무엇인지 쉬운 말로 */
   what: string;
   /** 이만큼 타면 교체 (또는 관리) */
@@ -26,7 +28,7 @@ export const PARTS: PartDef[] = [
   {
     id: 'chain-lube',
     name: '체인 오일',
-    emoji: '🛢️',
+    icon: Droplet,
     what: '체인이 부드럽게 돌도록 바르는 기름이에요. 오일이 없으면 체인이 빨리 닳아요.',
     intervalKm: 300,
     actionWord: '칠하기',
@@ -37,7 +39,7 @@ export const PARTS: PartDef[] = [
   {
     id: 'chain',
     name: '체인',
-    emoji: '⛓️',
+    icon: Link,
     what: '페달의 힘을 뒷바퀴로 보내는 줄이에요. 타면 조금씩 늘어나요. 늘어난 체인은 톱니도 닳게 해요.',
     intervalKm: 3000,
     actionWord: '교체',
@@ -48,7 +50,7 @@ export const PARTS: PartDef[] = [
   {
     id: 'brake-pads',
     name: '브레이크 패드',
-    emoji: '🛑',
+    icon: OctagonMinus,
     what: '바퀴를 잡아서 자전거를 세우는 고무(또는 금속) 조각이에요. 쓰면 닳아요.',
     intervalKm: 3000,
     actionWord: '교체',
@@ -59,7 +61,7 @@ export const PARTS: PartDef[] = [
   {
     id: 'tires',
     name: '타이어',
-    emoji: '🛞',
+    icon: CircleDot,
     what: '바퀴 바깥의 고무예요. 뒷바퀴가 앞바퀴보다 빨리 닳아요.',
     intervalKm: 5000,
     actionWord: '교체',
@@ -70,7 +72,7 @@ export const PARTS: PartDef[] = [
   {
     id: 'cassette',
     name: '카세트 (뒤 톱니)',
-    emoji: '⚙️',
+    icon: Cog,
     what: '뒷바퀴에 붙은 여러 개의 톱니예요. 보통 체인을 2~3번 바꿀 때 1번 바꿔요.',
     intervalKm: 9000,
     actionWord: '교체',
@@ -81,7 +83,7 @@ export const PARTS: PartDef[] = [
   {
     id: 'bar-tape',
     name: '바 테이프',
-    emoji: '🎀',
+    icon: Ribbon,
     what: '핸들에 감은 테이프예요. 손을 편하게 하고 미끄러지지 않게 해요.',
     intervalKm: 6000,
     intervalMonths: 12,
@@ -93,7 +95,7 @@ export const PARTS: PartDef[] = [
   {
     id: 'cables',
     name: '케이블 (변속·브레이크)',
-    emoji: '🧵',
+    icon: Cable,
     what: '레버와 변속기·브레이크를 잇는 가는 쇠줄이에요. 늘어나거나 녹슬어요.',
     intervalKm: 8000,
     intervalMonths: 18,
@@ -105,7 +107,7 @@ export const PARTS: PartDef[] = [
   {
     id: 'checkup',
     name: '샵 정기 점검',
-    emoji: '🔧',
+    icon: Wrench,
     what: '자전거 샵에서 전체를 한 번 봐 줘요. 볼트 조임, 변속, 브레이크, 바퀴 휨을 점검해요.',
     intervalKm: 3000,
     intervalMonths: 12,

@@ -11,10 +11,8 @@ export default function Onboarding({ onDone, initial }: { onDone(bike: Bike): vo
 
   if (step === 0) {
     return (
-      <div className="onboarding">
-        <div className="hero-emoji" aria-hidden>
-          🚲
-        </div>
+      <div className="onboarding" key="step-0">
+        <img className="hero-logo" src="/logo.webp" alt="" width={96} height={96} />
         <h1 className="hero">자전거 첫걸음</h1>
         <p className="lead">
           자전거를 처음 타는 사람을 위한 앱이에요.
@@ -32,7 +30,7 @@ export default function Onboarding({ onDone, initial }: { onDone(bike: Bike): vo
 
   if (step === 1) {
     return (
-      <div className="onboarding">
+      <div className="onboarding" key="step-1">
         <h1>내 자전거는 무엇이에요?</h1>
         <p className="muted">자전거 몸통(프레임)에 글자가 써 있어요. 몰라도 괜찮아요.</p>
         <div className="model-list">
@@ -59,7 +57,7 @@ export default function Onboarding({ onDone, initial }: { onDone(bike: Bike): vo
   const kmNumber = Math.max(0, Number(startKm) || 0);
 
   return (
-    <div className="onboarding">
+    <div className="onboarding" key="step-2">
       <h1>조금만 더 알려 주세요</h1>
       <label className="field">
         <span>자전거 이름 (선택)</span>

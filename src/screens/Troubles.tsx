@@ -3,7 +3,8 @@ import { findModel } from '../data/bikeModels';
 import { findPart } from '../data/parts';
 import { TROUBLES, fillNeeds, findTrouble } from '../data/troubles';
 import { go } from '../lib/router';
-import { Card, DiyBadge, TopBar, Warning } from '../components/ui';
+import { Store, Toolbox } from 'lucide-react';
+import { Card, Chevron, DiyBadge, IconTile, TopBar, Warning } from '../components/ui';
 
 export function TroubleList() {
   return (
@@ -13,18 +14,14 @@ export function TroubleList() {
       {TROUBLES.map((t) => (
         <Card key={t.id} onClick={() => go(`/help/${t.id}`)}>
           <div className="part-row">
-            <span className="part-emoji" aria-hidden>
-              {t.emoji}
-            </span>
+            <IconTile icon={t.icon} />
             <div className="grow">
               <strong>{t.symptom}</strong>
               <div>
                 <DiyBadge level={t.diy} />
               </div>
             </div>
-            <span className="chev" aria-hidden>
-              ›
-            </span>
+            <Chevron />
           </div>
         </Card>
       ))}
@@ -58,7 +55,10 @@ export function TroubleDetail({ id, bike }: { id: string; bike: Bike }) {
       </Card>
 
       <Card className="needs">
-        <h2 className="card-title">🧰 필요한 것</h2>
+        <h2 className="card-title with-icon">
+          <Toolbox size={18} aria-hidden />
+          필요한 것
+        </h2>
         <ul className="checklist">
           {t.needs.map((n) => (
             <li key={n}>
@@ -80,13 +80,17 @@ export function TroubleDetail({ id, bike }: { id: string; bike: Bike }) {
       </Card>
 
       <Card className="shop">
-        <h2 className="card-title">🏪 이럴 때는 샵으로</h2>
+        <h2 className="card-title with-icon">
+          <Store size={18} aria-hidden />
+          이럴 때는 샵으로
+        </h2>
         <p>{t.goToShop}</p>
       </Card>
 
       {part && (
         <button className="btn big" onClick={() => go(`/parts/${part.id}`)}>
-          {part.emoji} {part.name} 정보와 추천 부품 보기
+          <part.icon size={18} aria-hidden />
+          {part.name} 정보와 추천 부품 보기
         </button>
       )}
     </div>

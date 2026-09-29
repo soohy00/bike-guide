@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { ChevronLeft, ChevronRight, Lightbulb, TriangleAlert, type LucideIcon } from 'lucide-react';
 import type { PartStatus } from '../lib/maintenance';
 import { go } from '../lib/router';
 
@@ -7,7 +8,7 @@ export function TopBar({ title, backTo }: { title: string; backTo?: string }) {
     <header className="topbar">
       {backTo !== undefined && (
         <button className="topbar-back" onClick={() => go(backTo)} aria-label="뒤로">
-          ‹
+          <ChevronLeft size={24} aria-hidden />
         </button>
       )}
       <h1>{title}</h1>
@@ -52,7 +53,8 @@ export function Card({ children, onClick, className = '' }: { children: ReactNod
 export function Tip({ children }: { children: ReactNode }) {
   return (
     <p className="tip">
-      <span aria-hidden>💡</span> {children}
+      <Lightbulb size={16} aria-hidden />
+      <span>{children}</span>
     </p>
   );
 }
@@ -60,9 +62,23 @@ export function Tip({ children }: { children: ReactNode }) {
 export function Warning({ children }: { children: ReactNode }) {
   return (
     <p className="warning">
-      <span aria-hidden>⚠️</span> {children}
+      <TriangleAlert size={16} aria-hidden />
+      <span>{children}</span>
     </p>
   );
+}
+
+/** 부품, 고장, 수업 아이콘. 네모 칸 안에 아이콘을 넣어요. */
+export function IconTile({ icon: Icon, big = false }: { icon: LucideIcon; big?: boolean }) {
+  return (
+    <span className={`icon-tile ${big ? 'big' : ''}`} aria-hidden>
+      <Icon size={big ? 28 : 20} />
+    </span>
+  );
+}
+
+export function Chevron() {
+  return <ChevronRight className="chev" size={18} aria-hidden />;
 }
 
 export function km(n: number, digits = 0): string {

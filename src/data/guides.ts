@@ -1,3 +1,5 @@
+import { Backpack, BookA, Cog, Droplet, Gauge, ListChecks, TrafficCone, type LucideIcon } from 'lucide-react';
+
 export interface GuideSection {
   title?: string;
   text?: string;
@@ -10,7 +12,7 @@ export interface GuideSection {
 
 export interface Guide {
   id: string;
-  emoji: string;
+  icon: LucideIcon;
   title: string;
   summary: string;
   minutes: number;
@@ -20,7 +22,7 @@ export interface Guide {
 export const GUIDES: Guide[] = [
   {
     id: 'pre-ride',
-    emoji: '✅',
+    icon: ListChecks,
     title: '타기 전 1분 점검',
     summary: '탈 때마다 해요. 공기, 브레이크, 체인, 바퀴를 봐요.',
     minutes: 1,
@@ -39,7 +41,7 @@ export const GUIDES: Guide[] = [
   },
   {
     id: 'pump',
-    emoji: '🎈',
+    icon: Gauge,
     title: '바람 넣는 법',
     summary: '로드 자전거는 바람이 빨리 빠져요. 일주일에 1번 넣어요.',
     minutes: 3,
@@ -68,7 +70,7 @@ export const GUIDES: Guide[] = [
   },
   {
     id: 'lube',
-    emoji: '🛢️',
+    icon: Droplet,
     title: '체인에 오일 칠하기',
     summary: '300km마다, 또는 비 온 날 뒤에 해요. 5분이면 끝나요.',
     minutes: 5,
@@ -87,7 +89,7 @@ export const GUIDES: Guide[] = [
   },
   {
     id: 'gears',
-    emoji: '⚙️',
+    icon: Cog,
     title: '기어 쓰는 법',
     summary: '오르막은 가볍게, 평지는 무겁게. 체인을 꼬지 마세요.',
     minutes: 3,
@@ -110,7 +112,7 @@ export const GUIDES: Guide[] = [
   },
   {
     id: 'kit',
-    emoji: '🎒',
+    icon: Backpack,
     title: '꼭 필요한 준비물',
     summary: '처음 살 것들이에요. 비싼 것은 나중에 사요.',
     minutes: 2,
@@ -135,7 +137,7 @@ export const GUIDES: Guide[] = [
   },
   {
     id: 'safety',
-    emoji: '🚦',
+    icon: TrafficCone,
     title: '안전하게 타는 법',
     summary: '도로에서 지켜야 할 것들이에요.',
     minutes: 3,
@@ -159,7 +161,7 @@ export const GUIDES: Guide[] = [
   },
   {
     id: 'words',
-    emoji: '📖',
+    icon: BookA,
     title: '자전거 부품 이름',
     summary: '샵에서 쓰는 말이에요. 알면 말하기 쉬워요.',
     minutes: 4,

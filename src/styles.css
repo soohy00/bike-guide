@@ -52,6 +52,10 @@
 
   --tabbar-h: 60px;
   --edge: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+  /* 모션: kinetics.colorion.co 의 곡선이에요 (DESIGN.md 에 모션이 없어요) */
+  --ease-glide: cubic-bezier(0.16, 1, 0.3, 1); /* Stagger Entrance, Elastic Progress */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* Squish Button: 놓을 때 */
   color-scheme: dark;
 }
 
@@ -102,6 +106,12 @@ input {
   font: inherit;
   color: inherit;
   letter-spacing: inherit;
+}
+
+/* lucide 아이콘: 기본 선 굵기 2 를 조금 얇게. 글자 무게 500 과 맞춰요. */
+.lucide {
+  stroke-width: 1.75;
+  flex-shrink: 0;
 }
 
 :focus-visible {
@@ -168,8 +178,8 @@ input {
   border: 0;
   background: none;
   color: var(--ink-subtle);
-  font-size: 28px;
-  line-height: 1;
+  display: grid;
+  place-items: center;
   width: 44px;
   height: 44px;
   margin-left: -12px;
@@ -196,11 +206,13 @@ input {
   color: var(--ink);
 }
 
+/* 누르면 살짝 작아지고, 놓으면 튕기며 돌아와요 (kinetics: Squish Button) */
 .card-button {
   cursor: pointer;
   transition:
     background 0.15s,
-    border-color 0.15s;
+    border-color 0.15s,
+    transform 0.5s var(--ease-spring);
 }
 
 .card-button:hover {
@@ -210,6 +222,11 @@ input {
 
 .card-button:active {
   background: var(--surface-3);
+  transform: scale(0.98);
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    transform 0.08s ease-out;
 }
 
 /* card-title 을 모바일에 맞게 줄였어요 */
@@ -219,6 +236,16 @@ input {
   font-weight: 500;
   letter-spacing: -0.2px;
   color: var(--ink);
+}
+
+.card-title.with-icon {
+  display: flex;
+  align-items: center;
+  gap: var(--s-xs);
+}
+
+.card-title.with-icon .lucide {
+  color: var(--ink-subtle);
 }
 
 /* Buttons */
@@ -299,7 +326,8 @@ input {
   border: 1px solid transparent;
   background: none;
   color: var(--ink-subtle);
-  font-size: 18px;
+  display: grid;
+  place-items: center;
   width: 44px;
   height: 44px;
   border-radius: var(--r-md);
@@ -307,13 +335,10 @@ input {
   flex-shrink: 0;
 }
 
-.icon-btn {
-  filter: grayscale(1);
-}
-
 .icon-btn:hover {
   background: var(--surface-2);
   border-color: var(--hairline);
+  color: var(--ink);
 }
 
 /* Home */
@@ -354,6 +379,10 @@ input {
 }
 
 .sos {
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    transform 0.5s var(--ease-spring);
   display: flex;
   align-items: center;
   gap: var(--s-sm);
@@ -374,6 +403,15 @@ input {
   border-color: var(--hairline-strong);
 }
 
+.sos:active {
+  background: var(--surface-3);
+  transform: scale(0.98);
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    transform 0.08s ease-out;
+}
+
 /* Parts */
 .part-row {
   display: flex;
@@ -381,9 +419,9 @@ input {
   align-items: center;
 }
 
-/* 이모지는 흑백으로 보여 줘요. DESIGN.md: 강조 색은 1개만. */
-.part-emoji {
-  font-size: 20px;
+/* 아이콘 칸. 아이콘은 글자 색만 써요. DESIGN.md: 강조 색은 1개만. */
+.icon-tile {
+  color: var(--ink-muted);
   width: 40px;
   height: 40px;
   display: grid;
@@ -392,11 +430,9 @@ input {
   background: var(--surface-3);
   border: 1px solid var(--hairline);
   border-radius: var(--r-md);
-  filter: grayscale(1);
 }
 
-.part-emoji.big {
-  font-size: 28px;
+.icon-tile.big {
   width: 56px;
   height: 56px;
   border-radius: var(--r-lg);
@@ -412,7 +448,6 @@ input {
 }
 
 .chev {
-  font-size: 20px;
   color: var(--ink-tertiary);
 }
 
@@ -423,9 +458,18 @@ input {
   overflow: hidden;
 }
 
+/* 막대가 0 에서 차오르고 부드럽게 멈춰요 (kinetics: Elastic Progress) */
 .wearbar-fill {
   height: 100%;
   border-radius: var(--r-pill);
+  transition: width 0.9s var(--ease-glide);
+  animation: bar-fill 0.9s var(--ease-glide) 0.15s backwards;
+}
+
+@keyframes bar-fill {
+  from {
+    width: 0;
+  }
 }
 
 .wearbar-fill.ok {
@@ -581,6 +625,7 @@ input {
 .pick-bar div {
   height: 100%;
   background: var(--ink-subtle);
+  animation: bar-fill 0.9s var(--ease-glide) 0.15s backwards;
 }
 
 /* Lists */
@@ -654,12 +699,21 @@ input {
 
 .tip,
 .warning {
+  display: flex;
+  gap: var(--s-xs);
+  align-items: flex-start;
   padding: var(--s-sm) var(--s-md);
   border-radius: var(--r-md);
   font-size: 14px;
   background: var(--surface-2);
   border: 1px solid var(--hairline);
   color: var(--ink-muted);
+}
+
+.tip .lucide,
+.warning .lucide {
+  margin-top: 3px;
+  color: var(--ink-subtle);
 }
 
 .warning {
@@ -824,10 +878,14 @@ input {
   min-height: 100dvh;
 }
 
-.hero-emoji {
-  font-size: 56px;
+/* 로고 (사용자가 준 그림). 앱 아이콘처럼 모서리를 둥글게 해요. */
+.hero-logo {
+  display: block;
+  width: 96px;
+  height: 96px;
   margin-top: 12vh;
-  filter: grayscale(1);
+  border-radius: 22px;
+  box-shadow: 0 0 0 1px var(--hairline);
 }
 
 /* display-md (모바일) */
@@ -850,6 +908,10 @@ input {
 }
 
 .model-item {
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    transform 0.5s var(--ease-spring);
   border: 1px solid var(--hairline);
   background: var(--surface-1);
   color: var(--ink);
@@ -871,6 +933,14 @@ input {
 
 .model-item:hover {
   background: var(--surface-2);
+}
+
+.model-item:active {
+  transform: scale(0.97);
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    transform 0.08s ease-out;
 }
 
 .model-item.selected {
@@ -922,6 +992,7 @@ input {
 }
 
 .tab {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -931,18 +1002,77 @@ input {
   font-size: 12px;
   font-weight: 500;
   gap: 2px;
+  transition: color 0.15s;
 }
 
-.tab-icon {
-  font-size: 18px;
-  filter: grayscale(1);
-  opacity: 0.5;
+/* 21st.dev Mobile Navigation Tabs: 20px 아이콘 + 글자, 지금 탭에 2px 선.
+   탭 막대가 화면 아래에 있어서, 선을 탭 위쪽에 그려요. */
+.tab::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 28%;
+  right: 28%;
+  height: 2px;
+  border-radius: 0 0 var(--r-xs) var(--r-xs);
+  background: var(--ink);
+  transform: scaleX(0);
+  transition: transform 0.35s var(--ease-glide);
+}
+
+.tab:hover {
+  color: var(--ink-subtle);
 }
 
 .tab.active {
   color: var(--ink);
 }
 
-.tab.active .tab-icon {
-  opacity: 1;
+.tab.active::before {
+  transform: scaleX(1);
+}
+
+/* 화면이 바뀌면 카드가 하나씩 올라와요 (kinetics: Stagger Entrance) */
+.screen > .stack > *,
+.onboarding > * {
+  animation: rise 0.45s var(--ease-glide) backwards;
+}
+
+.screen > .stack > :nth-child(2),
+.onboarding > :nth-child(2) {
+  animation-delay: 40ms;
+}
+.screen > .stack > :nth-child(3),
+.onboarding > :nth-child(3) {
+  animation-delay: 80ms;
+}
+.screen > .stack > :nth-child(4),
+.onboarding > :nth-child(4) {
+  animation-delay: 120ms;
+}
+.screen > .stack > :nth-child(5),
+.onboarding > :nth-child(5) {
+  animation-delay: 160ms;
+}
+.screen > .stack > :nth-child(n + 6),
+.onboarding > :nth-child(n + 6) {
+  animation-delay: 200ms;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+/* 움직임 줄이기를 켠 사람에게는 모션을 꺼요 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

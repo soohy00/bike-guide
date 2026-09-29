@@ -19,7 +19,13 @@
 - 한글 글꼴: Pretendard (npm `pretendard`). DESIGN.md가 추천한 대체 글꼴 Inter를 바탕으로 만든 글꼴이에요.
 - 부품 상태 색: 좋음 `#27a644` (DESIGN.md의 success), 곧 `#d9a53b`, 지금 `#eb5757`.
   막대, 작은 점, 경고 선에만 써요. 카드나 버튼 배경에는 쓰지 마세요.
-- 이모지 아이콘은 흑백(`grayscale`)으로 보여 줘요. 강조 색을 1개로 지키기 위해서예요.
+- 아이콘: `lucide-react`를 써요. 이모지는 쓰지 마세요. 선 굵기는 1.75, 색은 글자 색(ink 계열)만 써요.
+  부품·고장·수업 아이콘은 `src/data/*.ts`의 `icon`에 있어요. 네모 칸은 `IconTile`(`src/components/ui.tsx`)이에요.
+- 로고: `public/logo.webp` (사용자가 준 그림). 앱 아이콘 PNG(`icon-192`, `icon-512`, `apple-touch-icon`, `favicon`)는 이 그림으로 만들었어요.
+  로고의 초록·갈색은 로고 안에서만 써요. UI 색으로 쓰지 마세요.
+- 모션: kinetics.colorion.co의 곡선을 써요 (`--ease-glide`, `--ease-spring`).
+  화면이 바뀔 때 = Stagger Entrance, 막대가 찰 때 = Elastic Progress, 카드를 누를 때 = Squish Button.
+  `prefers-reduced-motion`이면 모션을 꺼요.
 
 ## 프론트엔드 참고
 

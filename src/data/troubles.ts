@@ -1,6 +1,8 @@
+import { Link2Off, OctagonMinus, Scissors, Shuffle, Unlink, Volume2, Waves, Wind, type LucideIcon } from 'lucide-react';
+
 export interface Trouble {
   id: string;
-  emoji: string;
+  icon: LucideIcon;
   /** 내 눈에 보이는 문제 */
   symptom: string;
   /** 왜 이런 일이 생기나요 */
@@ -22,7 +24,7 @@ export interface Trouble {
 export const TROUBLES: Trouble[] = [
   {
     id: 'flat',
-    emoji: '💨',
+    icon: Wind,
     symptom: '바퀴 바람이 빠졌어요 (펑크)',
     why: '작은 유리, 철사, 돌이 타이어를 뚫고 안쪽 튜브에 구멍을 냈어요. 바람이 너무 적어도 튜브가 찢어져요.',
     needs: ['예비 튜브 ({tireSize}, 프레스타 밸브)', '타이어 레버 2개', '휴대용 펌프 또는 CO2', '(선택) 패치 킷'],
@@ -44,7 +46,7 @@ export const TROUBLES: Trouble[] = [
   },
   {
     id: 'chain-drop',
-    emoji: '🔗',
+    icon: Link2Off,
     symptom: '체인이 빠졌어요',
     why: '기어를 너무 빨리 바꾸거나, 울퉁불퉁한 길에서 체인이 톱니 밖으로 떨어졌어요.',
     needs: ['(선택) 장갑 또는 휴지'],
@@ -60,7 +62,7 @@ export const TROUBLES: Trouble[] = [
   },
   {
     id: 'chain-noise',
-    emoji: '🔊',
+    icon: Volume2,
     symptom: '체인에서 "찰찰" "끽끽" 소리가 나요',
     why: '체인에 오일이 없어요. 또는 체인에 먼지가 많아요.',
     needs: ['체인 오일', '마른 헝겊'],
@@ -77,7 +79,7 @@ export const TROUBLES: Trouble[] = [
   },
   {
     id: 'shift',
-    emoji: '🔀',
+    icon: Shuffle,
     symptom: '기어가 잘 안 바뀌어요 / 저절로 튀어요',
     why: '변속 케이블이 조금 늘어났어요. 또는 체인이나 톱니가 닳았어요.',
     needs: ['(없어도 돼요) 손으로 돌리는 조절 나사', '닳았으면: {speeds}단 체인'],
@@ -93,7 +95,7 @@ export const TROUBLES: Trouble[] = [
   },
   {
     id: 'brake-weak',
-    emoji: '🛑',
+    icon: OctagonMinus,
     symptom: '브레이크가 약해요 / 끼익 소리가 나요',
     why: '브레이크 패드가 닳았어요. 또는 패드나 림에 기름·물이 묻었어요.',
     needs: ['브레이크 패드 (림용 또는 디스크용)', '알코올 솜', '육각 렌치 (보통 4mm 또는 5mm)'],
@@ -110,7 +112,7 @@ export const TROUBLES: Trouble[] = [
   },
   {
     id: 'wheel-wobble',
-    emoji: '🌀',
+    icon: Waves,
     symptom: '바퀴가 흔들려요 / 브레이크에 닿아요',
     why: '바퀴가 제대로 안 끼워졌어요. 또는 바퀴(림)가 휘었어요.',
     needs: ['(없어도 돼요) 손'],
@@ -126,7 +128,7 @@ export const TROUBLES: Trouble[] = [
   },
   {
     id: 'chain-broken',
-    emoji: '💥',
+    icon: Unlink,
     symptom: '체인이 끊어졌어요',
     why: '체인이 많이 닳았어요. 또는 힘을 세게 주면서 기어를 바꿨어요.',
     needs: ['{speeds}단용 퀵링크', '체인 공구 (체인 커터)', '또는: 택시·가족에게 연락'],
@@ -142,7 +144,7 @@ export const TROUBLES: Trouble[] = [
   },
   {
     id: 'tire-cut',
-    emoji: '✂️',
+    icon: Scissors,
     symptom: '타이어가 찢어졌어요',
     why: '날카로운 것에 베였어요. 튜브가 밖으로 튀어나올 수 있어요.',
     needs: ['타이어 부트 (또는 지폐·에너지바 포장지)', '새 타이어 ({tireSize})'],

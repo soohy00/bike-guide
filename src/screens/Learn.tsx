@@ -1,6 +1,7 @@
 import { GUIDES, findGuide } from '../data/guides';
 import { go } from '../lib/router';
-import { Card, TopBar, Tip } from '../components/ui';
+import { ChevronRight } from 'lucide-react';
+import { Card, Chevron, IconTile, TopBar, Tip } from '../components/ui';
 
 export function GuideList() {
   return (
@@ -10,9 +11,7 @@ export function GuideList() {
       {GUIDES.map((g, i) => (
         <Card key={g.id} onClick={() => go(`/learn/${g.id}`)}>
           <div className="part-row">
-            <span className="part-emoji" aria-hidden>
-              {g.emoji}
-            </span>
+            <IconTile icon={g.icon} />
             <div className="grow">
               <strong>
                 {i + 1}. {g.title}
@@ -21,9 +20,7 @@ export function GuideList() {
                 {g.summary} · {g.minutes}분
               </p>
             </div>
-            <span className="chev" aria-hidden>
-              ›
-            </span>
+            <Chevron />
           </div>
         </Card>
       ))}
@@ -46,7 +43,7 @@ export function GuideDetail({ id }: { id: string }) {
 
   return (
     <div className="stack">
-      <TopBar title={`${g.emoji} ${g.title}`} backTo="/learn" />
+      <TopBar title={g.title} backTo="/learn" />
       <p className="muted">{g.summary}</p>
       {g.sections.map((s, i) => (
         <Card key={i}>
@@ -75,7 +72,8 @@ export function GuideDetail({ id }: { id: string }) {
       ))}
       {next && (
         <button className="btn big" onClick={() => go(`/learn/${next.id}`)}>
-          다음 수업: {next.emoji} {next.title} ›
+          다음 수업: {next.title}
+          <ChevronRight size={16} aria-hidden />
         </button>
       )}
     </div>

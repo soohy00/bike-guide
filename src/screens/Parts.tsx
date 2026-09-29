@@ -6,7 +6,8 @@ import { popularFor } from '../data/popularParts';
 import { TROUBLES } from '../data/troubles';
 import { allPartHealth, byUrgency, partHealth, statusLabel, totalKm } from '../lib/maintenance';
 import { go } from '../lib/router';
-import { Card, DiyBadge, StatusPill, TopBar, WearBar, km } from '../components/ui';
+import { Check } from 'lucide-react';
+import { Card, Chevron, DiyBadge, IconTile, StatusPill, TopBar, WearBar, km } from '../components/ui';
 
 export function PartList({ state }: { state: AppState }) {
   const list = byUrgency(allPartHealth(state, PARTS));
@@ -17,9 +18,7 @@ export function PartList({ state }: { state: AppState }) {
       {list.map((h) => (
         <Card key={h.part.id} onClick={() => go(`/parts/${h.part.id}`)}>
           <div className="part-row">
-            <span className="part-emoji" aria-hidden>
-              {h.part.emoji}
-            </span>
+            <IconTile icon={h.part.icon} />
             <div className="grow">
               <div className="part-title">
                 <strong>{h.part.name}</strong>
@@ -67,9 +66,7 @@ export function PartDetail({ id, state, actions }: { id: string; state: AppState
 
       <Card>
         <div className="part-title">
-          <span className="part-emoji big" aria-hidden>
-            {part.emoji}
-          </span>
+          <IconTile icon={part.icon} big />
           <StatusPill status={h.status}>{statusLabel(h)}</StatusPill>
         </div>
         <WearBar wear={h.wear} status={h.status} />
@@ -93,7 +90,8 @@ export function PartDetail({ id, state, actions }: { id: string; state: AppState
           )}
         </dl>
         <button className="btn primary big" onClick={onReplaced}>
-          ✔ 오늘 {part.actionWord === '교체' ? '교체했어요' : `${part.actionWord} 했어요`}
+          <Check size={18} aria-hidden />
+          오늘 {part.actionWord === '교체' ? '교체했어요' : `${part.actionWord} 했어요`}
         </button>
         {record && (
           <button className="btn link" onClick={() => actions.undoReplaced(part.id)}>
@@ -156,13 +154,9 @@ export function PartDetail({ id, state, actions }: { id: string; state: AppState
           {related.map((t) => (
             <Card key={t.id} onClick={() => go(`/help/${t.id}`)}>
               <div className="part-row">
-                <span className="part-emoji" aria-hidden>
-                  {t.emoji}
-                </span>
+                <IconTile icon={t.icon} />
                 <strong className="grow">{t.symptom}</strong>
-                <span className="chev" aria-hidden>
-                  ›
-                </span>
+                <Chevron />
               </div>
             </Card>
           ))}

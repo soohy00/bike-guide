@@ -4,6 +4,7 @@ import type { LatLng, Ride } from '../types';
 import type { Recorder } from '../lib/useRecorder';
 import { avgSpeedKmh, formatDuration } from '../lib/geo';
 import { go } from '../lib/router';
+import { Bike, Play, Square, Trash2 } from 'lucide-react';
 import { Card, Tip, TopBar, Warning, km } from '../components/ui';
 
 const MONTH_MS = 30 * 24 * 60 * 60 * 1000;
@@ -19,7 +20,8 @@ export function RideList({ rides, actions }: { rides: Ride[]; actions: Actions }
       <TopBar title="주행" />
       <div className="row">
         <button className="btn primary grow" onClick={() => go('/rides/record')}>
-          ▶ GPS로 기록
+          <Play size={16} aria-hidden />
+          GPS로 기록
         </button>
         <button className="btn grow" onClick={() => go('/rides/new')}>
           손으로 입력
@@ -46,7 +48,10 @@ export function RideList({ rides, actions }: { rides: Ride[]; actions: Actions }
 
       {rides.length === 0 ? (
         <Card>
-          <p>아직 기록이 없어요. 첫 주행을 기록해 봐요! 🚴</p>
+          <p className="row">
+            <Bike size={18} className="muted" aria-hidden />
+            <span>아직 기록이 없어요. 첫 주행을 기록해 봐요!</span>
+          </p>
         </Card>
       ) : (
         rides.map((r) => (
@@ -71,7 +76,7 @@ export function RideList({ rides, actions }: { rides: Ride[]; actions: Actions }
                   if (window.confirm('이 기록을 지울까요? 총 거리도 줄어요.')) actions.deleteRide(r.id);
                 }}
               >
-                🗑️
+                <Trash2 size={18} aria-hidden />
               </button>
             </div>
           </Card>
@@ -127,7 +132,8 @@ export function RecordRide({ recorder, actions }: { recorder: Recorder; actions:
         {status === 'waiting' && <p className="muted small">GPS 신호를 찾고 있어요…</p>}
         {status === 'idle' ? (
           <button className="btn primary big" onClick={() => void recorder.start()}>
-            ▶ 시작
+            <Play size={16} aria-hidden />
+            시작
           </button>
         ) : (
           <div className="row">
@@ -140,7 +146,8 @@ export function RecordRide({ recorder, actions }: { recorder: Recorder; actions:
               버리기
             </button>
             <button className="btn primary grow" onClick={finish}>
-              ■ 끝내고 저장
+              <Square size={14} aria-hidden />
+              끝내고 저장
             </button>
           </div>
         )}

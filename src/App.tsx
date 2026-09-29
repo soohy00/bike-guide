@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { Bike as BikeIcon, BookOpen, Bolt, House, LifeBuoy } from 'lucide-react';
 import type { AppState, Bike, Ride } from './types';
 import { clearState, EMPTY_STATE, loadState, newId, saveState } from './lib/storage';
 import { go, useRoute } from './lib/router';
@@ -23,11 +24,11 @@ export interface Actions {
 }
 
 const TABS = [
-  { path: '', label: '홈', icon: '🏠' },
-  { path: 'parts', label: '부품', icon: '🔩' },
-  { path: 'help', label: '고장', icon: '🆘' },
-  { path: 'learn', label: '배우기', icon: '📚' },
-  { path: 'rides', label: '주행', icon: '🚴' },
+  { path: '', label: '홈', icon: House },
+  { path: 'parts', label: '부품', icon: Bolt },
+  { path: 'help', label: '고장', icon: LifeBuoy },
+  { path: 'learn', label: '배우기', icon: BookOpen },
+  { path: 'rides', label: '주행', icon: BikeIcon },
 ];
 
 export default function App() {
@@ -110,13 +111,13 @@ export default function App() {
           <span className="rec-dot" aria-hidden /> 기록 중 · {recorder.distanceKm.toFixed(2)} km · {formatDuration(recorder.elapsedSec)}
         </button>
       )}
-      <main className="screen">{screen}</main>
+      <main className="screen" key={route.join('/')}>
+        {screen}
+      </main>
       <nav className="tabbar" aria-label="메뉴">
         {TABS.map((t) => (
           <a key={t.path} href={`#/${t.path}`} className={`tab ${tab === t.path ? 'active' : ''}`} aria-current={tab === t.path ? 'page' : undefined}>
-            <span className="tab-icon" aria-hidden>
-              {t.icon}
-            </span>
+            <t.icon className="tab-icon" size={20} aria-hidden />
             <span className="tab-label">{t.label}</span>
           </a>
         ))}
