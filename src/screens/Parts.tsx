@@ -107,7 +107,7 @@ export function PartDetail({ id, state, actions }: { id: string; state: AppState
         <p>{part.what}</p>
         <div className="row wrap">
           <DiyBadge level={part.diy} />
-          <span className="muted small">💰 {part.cost}</span>
+          <span className="muted small">{part.cost}</span>
         </div>
       </Card>
 

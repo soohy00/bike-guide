@@ -18,7 +18,7 @@ export default function Home({ state, currentKm }: { state: AppState; currentKm:
     <div className="stack">
       <header className="home-head">
         <div>
-          <p className="muted small">{`${model.brand} ${model.name}`}</p>
+          <p className="eyebrow">{`${model.brand} ${model.name}`}</p>
           <h1>{bike.nickname || '내 자전거'}</h1>
         </div>
         <button className="icon-btn" onClick={() => go('/settings')} aria-label="설정">
@@ -27,21 +27,35 @@ export default function Home({ state, currentKm }: { state: AppState; currentKm:
       </header>
 
       <Card className="odometer">
-        <p className="muted small">총 주행 거리</p>
-        <p className="odometer-value">{km(currentKm)}</p>
+        <p className="eyebrow">총 주행 거리</p>
+        <p className="odometer-value">
+          {Math.round(currentKm).toLocaleString('ko-KR')}
+          <small>km</small>
+        </p>
         <p className="muted small">최근 7일 {km(weekKm, 1)}</p>
         <div className="row">
           <button className="btn primary grow" onClick={() => go('/rides/record')}>
             ▶ 주행 기록
           </button>
           <button className="btn grow" onClick={() => go('/rides/new')}>
-            ✏️ 거리 입력
+            거리 입력
           </button>
         </div>
       </Card>
 
-      <button className="btn danger big" onClick={() => go('/help')}>
-        🆘 자전거가 고장 났어요
+      <button className="sos" onClick={() => go('/help')}>
+        <span className="part-emoji" aria-hidden>
+          🆘
+        </span>
+        <span className="grow">
+          자전거가 고장 났어요
+          <span className="muted small" style={{ display: 'block', fontWeight: 400 }}>
+            증상을 고르면 필요한 것을 알려 줘요
+          </span>
+        </span>
+        <span className="chev" aria-hidden>
+          ›
+        </span>
       </button>
 
       <h2>할 일</h2>

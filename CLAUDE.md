@@ -6,6 +6,21 @@
 - 데이터는 localStorage에만 저장해요. 서버는 없어요.
 - 21st MCP는 `.mcp.json`에 있어요. API 키는 환경 변수 `TWENTY_FIRST_API_KEY`에서 읽어요. 키를 파일에 쓰지 마세요.
 
+## 디자인
+
+@DESIGN.md
+
+- `DESIGN.md`는 GitHub VoltAgent/awesome-design-md의 `design-md/linear.app/DESIGN.md`예요
+  (커밋 f696123, MIT). 파일 내용은 바꾸지 마세요.
+- 색, 글꼴, 간격은 DESIGN.md를 따라요. 토큰은 `src/styles.css`의 `:root`에 있어요.
+- 앱은 다크 모드만 있어요 (DESIGN.md: 라이트 모드를 만들지 마세요).
+
+### DESIGN.md에 없는 것 (이 프로젝트에서 정했어요)
+- 한글 글꼴: Pretendard (npm `pretendard`). DESIGN.md가 추천한 대체 글꼴 Inter를 바탕으로 만든 글꼴이에요.
+- 부품 상태 색: 좋음 `#27a644` (DESIGN.md의 success), 곧 `#d9a53b`, 지금 `#eb5757`.
+  막대, 작은 점, 경고 선에만 써요. 카드나 버튼 배경에는 쓰지 마세요.
+- 이모지 아이콘은 흑백(`grayscale`)으로 보여 줘요. 강조 색을 1개로 지키기 위해서예요.
+
 ## 프론트엔드 참고
 
 이 섹션은 이 3가지 때에만 써요:

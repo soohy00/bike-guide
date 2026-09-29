@@ -22,7 +22,7 @@ export function RideList({ rides, actions }: { rides: Ride[]; actions: Actions }
           ▶ GPS로 기록
         </button>
         <button className="btn grow" onClick={() => go('/rides/new')}>
-          ✏️ 손으로 입력
+          손으로 입력
         </button>
       </div>
 

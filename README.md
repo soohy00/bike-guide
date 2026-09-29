@@ -20,6 +20,7 @@
 - 데이터는 **브라우저 (localStorage)** 에만 저장해요.
 - "같은 모델 주인들이 많이 쓴 부품"은 **예시 데이터**예요. 화면에도 "예시"라고 써 있어요.
 - 교체 주기는 평균값이에요 (`src/data/parts.ts`).
+- 디자인은 `DESIGN.md` (Linear 스타일, 다크 모드만)를 따라요. [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md)에서 가져왔어요 (MIT).
 
 ## 실행
 

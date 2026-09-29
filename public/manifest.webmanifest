@@ -4,8 +4,8 @@
   "description": "초보를 위한 자전거 정비·입문 가이드",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f8fafc",
-  "theme_color": "#0f766e",
+  "background_color": "#010102",
+  "theme_color": "#010102",
   "lang": "ko",
   "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
 }
