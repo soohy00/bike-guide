@@ -1,0 +1,11 @@
+{
+  "name": "자전거 첫걸음",
+  "short_name": "자전거",
+  "description": "초보를 위한 자전거 정비·입문 가이드",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#0f766e",
+  "lang": "ko",
+  "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}
