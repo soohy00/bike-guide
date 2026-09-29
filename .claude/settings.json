@@ -1,0 +1,6 @@
+{
+  "extraKnownMarketplaces": {
+    "dryforge": { "source": { "source": "github", "repo": "prekuter/dryforge" } }
+  },
+  "enabledPlugins": { "dryforge@dryforge": true }
+}
