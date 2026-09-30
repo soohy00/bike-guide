@@ -19,8 +19,12 @@
 - 한글 글꼴: Pretendard (npm `pretendard`). DESIGN.md가 추천한 대체 글꼴 Inter를 바탕으로 만든 글꼴이에요.
 - 부품 상태 색: 좋음 `#27a644` (DESIGN.md의 success), 곧 `#d9a53b`, 지금 `#eb5757`.
   막대, 작은 점, 경고 선에만 써요. 카드나 버튼 배경에는 쓰지 마세요.
-- 아이콘: `lucide-react`를 써요. 이모지는 쓰지 마세요. 선 굵기는 1.75, 색은 글자 색(ink 계열)만 써요.
+- 아이콘: `lucide-react`를 써요. 이모지는 쓰지 마세요. 색은 글자 색(ink 계열)만 써요.
+  선 굵기는 화면에서 1.5px로 모든 크기에서 같아요 (Primer octicons, `vector-effect: non-scaling-stroke`).
+  지금 탭의 아이콘만 2px이에요 (M3 navigation bar: 채운 아이콘이 없으면 선을 굵게 해요).
   부품·고장·수업 아이콘은 `src/data/*.ts`의 `icon`에 있어요. 네모 칸은 `IconTile`(`src/components/ui.tsx`)이에요.
+- 아래 탭 막대 (M3 navigation bar): 탭 1개는 늘 켜져 있어요 (설정 화면 = 홈). 지금 탭을 다시 누르면 맨 위로 올라가요.
+- 부품 막대 (Geist Progress): 막대 옆에 "약 N km 남았어요" 글을 둬요. 막대 이름에 부품 이름을 넣어요.
 - 로고: `public/logo.webp` (사용자가 준 그림). 앱 아이콘 PNG(`icon-192`, `icon-512`, `apple-touch-icon`, `favicon`)는 이 그림으로 만들었어요.
   로고의 초록·갈색은 로고 안에서만 써요. UI 색으로 쓰지 마세요.
 - 모션: kinetics.colorion.co에서 가져왔어요. 곡선은 `--ease-glide` 1개만 써요 (튕기는 곡선은 쓰지 않아요).
