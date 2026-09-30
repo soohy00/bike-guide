@@ -8,7 +8,7 @@ import { TROUBLES } from '../data/troubles';
 import { allPartHealth, byUrgency, partHealth, statusLabel, totalKm } from '../lib/maintenance';
 import { go } from '../lib/router';
 import { Check } from 'lucide-react';
-import { Card, Chevron, DiyBadge, IconTile, StatusPill, TopBar, WearBar, km } from '../components/ui';
+import { Card, Chevron, DiyBadge, IconTile, LeftKm, StatusPill, TopBar, WearBar, km } from '../components/ui';
 
 export function PartList({ state }: { state: AppState }) {
   const list = byUrgency(allPartHealth(state, PARTS));
@@ -25,11 +25,8 @@ export function PartList({ state }: { state: AppState }) {
                 <strong>{h.part.name}</strong>
                 <StatusPill status={h.status}>{statusLabel(h)}</StatusPill>
               </div>
-              <WearBar wear={h.wear} status={h.status} />
-              <p className="muted small">
-                {h.leftKm > 0 ? `약 ${km(h.leftKm)} 남았어요` : `${km(-h.leftKm)} 넘었어요`}
-                {h.dueByTime && ' · 기간이 지났어요'}
-              </p>
+              <WearBar wear={h.wear} status={h.status} name={h.part.name} />
+              <LeftKm health={h} />
             </div>
           </div>
         </Card>
@@ -70,7 +67,7 @@ export function PartDetail({ id, state, actions }: { id: string; state: AppState
           <IconTile icon={part.icon} big />
           <StatusPill status={h.status}>{statusLabel(h)}</StatusPill>
         </div>
-        <WearBar wear={h.wear} status={h.status} />
+        <WearBar wear={h.wear} status={h.status} name={part.name} />
         <dl className="facts">
           <div>
             <dt>{record ? `마지막 ${part.actionWord} 뒤` : '처음부터'}</dt>

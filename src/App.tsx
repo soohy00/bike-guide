@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState, type MouseEvent } from 'react';
 import { Bike as BikeIcon, BookOpen, Bolt, House, LifeBuoy } from 'lucide-react';
 import type { AppState, Bike, Ride } from './types';
 import { clearState, EMPTY_STATE, loadState, newId, saveState } from './lib/storage';
@@ -103,6 +103,16 @@ export default function App() {
   }
 
   const recording = recorder.status !== 'idle' && !(tab === 'rides' && id === 'record');
+  // M3 navigation bar: 탭 1개는 늘 켜져 있어요. 설정은 홈에서 열어요.
+  const activeTab = tab === 'settings' ? '' : tab;
+
+  // M3 navigation bar: 지금 탭을 다시 누르면 맨 위로 올라가요.
+  const onTabClick = (e: MouseEvent<HTMLAnchorElement>, path: string) => {
+    if (path !== tab || id) return;
+    e.preventDefault();
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: still ? 'auto' : 'smooth' });
+  };
 
   return (
     <div className="app">
@@ -116,7 +126,13 @@ export default function App() {
       </main>
       <nav className="tabbar" aria-label="메뉴">
         {TABS.map((t) => (
-          <a key={t.path} href={`#/${t.path}`} className={`tab ${tab === t.path ? 'active' : ''}`} aria-current={tab === t.path ? 'page' : undefined}>
+          <a
+            key={t.path}
+            href={`#/${t.path}`}
+            className={`tab ${activeTab === t.path ? 'active' : ''}`}
+            aria-current={tab === t.path ? 'page' : undefined}
+            onClick={(e) => onTabClick(e, t.path)}
+          >
             <t.icon className="tab-icon" size={20} aria-hidden />
             <span className="tab-label">{t.label}</span>
           </a>

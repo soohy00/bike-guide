@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactNode } from 'react';
 import { ChevronLeft, ChevronRight, Lightbulb, TriangleAlert, type LucideIcon } from 'lucide-react';
-import type { PartStatus } from '../lib/maintenance';
+import type { PartHealth, PartStatus } from '../lib/maintenance';
 import { go } from '../lib/router';
 
 export function TopBar({ title, backTo }: { title: string; backTo?: string }) {
@@ -16,12 +16,22 @@ export function TopBar({ title, backTo }: { title: string; backTo?: string }) {
   );
 }
 
-export function WearBar({ wear, status }: { wear: number; status: PartStatus }) {
+export function WearBar({ wear, status, name }: { wear: number; status: PartStatus; name: string }) {
   const pct = Math.min(100, Math.round(wear * 100));
   return (
-    <div className="wearbar" role="meter" aria-valuemin={0} aria-valuemax={100} aria-valuenow={pct} aria-label="닳은 정도">
+    <div className="wearbar" role="meter" aria-valuemin={0} aria-valuemax={100} aria-valuenow={pct} aria-label={`${name} 닳은 정도`}>
       <div className={`wearbar-fill ${status}`} style={{ '--fill': `${pct}%` } as CSSProperties} />
     </div>
+  );
+}
+
+/** Geist Progress: 막대 옆에 단위가 있는 글을 둬요. */
+export function LeftKm({ health: h }: { health: PartHealth }) {
+  return (
+    <p className="muted small">
+      {h.leftKm > 0 ? `약 ${km(h.leftKm)} 남았어요` : `${km(-h.leftKm)} 넘었어요`}
+      {h.dueByTime && ' · 기간이 지났어요'}
+    </p>
   );
 }
 

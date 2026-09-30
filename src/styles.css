@@ -114,10 +114,16 @@ input {
   letter-spacing: inherit;
 }
 
-/* lucide 아이콘: 기본 선 굵기 2 를 조금 얇게. 글자 무게 500 과 맞춰요. */
+/* lucide 아이콘: 선 굵기를 화면에서 1.5px 로 같게 해요.
+   Primer (octicons design guidelines): 크기와 관계없이 선 굵기가 같아요.
+   non-scaling-stroke 가 없으면 28px 아이콘은 선이 2px 넘게 굵어져요. */
 .lucide {
-  stroke-width: 1.75;
+  stroke-width: 1.5px;
   flex-shrink: 0;
+}
+
+.lucide * {
+  vector-effect: non-scaling-stroke;
 }
 
 :focus-visible {
@@ -442,9 +448,10 @@ input {
   color: var(--ink-tertiary);
 }
 
+/* 빈 부분: surface-4 는 카드와 거의 같아서 (약 1.1:1) 막대 끝이 보이지 않았어요 */
 .wearbar {
   height: 4px;
-  background: var(--surface-4);
+  background: var(--hairline-strong);
   border-radius: var(--r-pill);
   overflow: hidden;
 }
@@ -611,7 +618,7 @@ input {
 
 .pick-bar {
   height: 4px;
-  background: var(--surface-4);
+  background: var(--hairline-strong);
   border-radius: var(--r-pill);
   margin: 6px 0;
   overflow: hidden;
@@ -1019,6 +1026,11 @@ input {
 
 .tab.active {
   color: var(--ink);
+}
+
+/* M3 navigation bar: 채운 아이콘이 없으면 지금 탭 아이콘의 선을 굵게 해요 */
+.tab.active .lucide {
+  stroke-width: 2px;
 }
 
 .tab.active::before {

@@ -4,7 +4,7 @@ import { PARTS } from '../data/parts';
 import { allPartHealth, byUrgency, statusLabel } from '../lib/maintenance';
 import { go } from '../lib/router';
 import { LifeBuoy, ListChecks, PartyPopper, Play, Settings } from 'lucide-react';
-import { Card, Chevron, IconTile, StatusPill, WearBar, km } from '../components/ui';
+import { Card, Chevron, IconTile, LeftKm, StatusPill, WearBar, km } from '../components/ui';
 
 const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 
@@ -45,7 +45,8 @@ export default function Home({ state, currentKm }: { state: AppState; currentKm:
                   <strong>{h.part.name}</strong>
                   <StatusPill status={h.status}>{statusLabel(h)}</StatusPill>
                 </div>
-                <WearBar wear={h.wear} status={h.status} />
+                <WearBar wear={h.wear} status={h.status} name={h.part.name} />
+                <LeftKm health={h} />
               </div>
             </div>
           </Card>
