@@ -1,4 +1,5 @@
 import { Component, lazy, Suspense, type ReactNode } from 'react';
+import type { BrakeType } from '../../types';
 import type { PartHealth } from '../../lib/maintenance';
 
 // 3D 코드는 커요. 부품 화면을 열 때만 받아요.
@@ -28,13 +29,13 @@ class Hide extends Component<{ children: ReactNode }, { failed: boolean }> {
   }
 }
 
-export default function BikeViewer({ health }: { health: PartHealth[] }) {
+export default function BikeViewer({ health, brake }: { health: PartHealth[]; brake: BrakeType }) {
   if (!hasWebGL()) return null;
   return (
     <Hide>
       <section className="bike3d-card">
         <Suspense fallback={<div className="bike3d" />}>
-          <Bike3D health={health} />
+          <Bike3D health={health} brake={brake} />
         </Suspense>
         <p className="muted small bike3d-hint">점을 누르면 부품을 자세히 봐요. 옆으로 끌면 돌아가요.</p>
       </section>

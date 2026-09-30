@@ -16,7 +16,7 @@ export function PartList({ state }: { state: AppState }) {
   return (
     <div className="stack stagger">
       <TopBar title="부품" />
-      <BikeViewer health={list} />
+      <BikeViewer health={list} brake={findModel(state.bike?.modelId).brakeType} />
       <p className="muted">막대가 가득 차면 바꿀 때예요. 부품을 누르면 자세히 봐요.</p>
       {list.map((h) => (
         <Card key={h.part.id} onClick={() => go(`/parts/${h.part.id}`)}>
