@@ -22,6 +22,10 @@
 - 교체 주기는 평균값이에요 (`src/data/parts.ts`).
 - 디자인은 `DESIGN.md` (Linear 스타일, 다크 모드만)를 따라요. [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md)에서 가져왔어요 (MIT).
 
+## 보기
+
+https://soohy00.github.io/bike-guide/ (main 에 올라가면 GitHub Actions 가 자동으로 올려요)
+
 ## 실행
 
 ```bash

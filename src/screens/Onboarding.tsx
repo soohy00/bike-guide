@@ -12,7 +12,7 @@ export default function Onboarding({ onDone, initial }: { onDone(bike: Bike): vo
   if (step === 0) {
     return (
       <div className="onboarding" key="step-0">
-        <img className="hero-logo" src="/logo.webp" alt="" width={96} height={96} />
+        <img className="hero-logo" src={`${import.meta.env.BASE_URL}logo.webp`} alt="" width={96} height={96} />
         <h1 className="hero">자전거 첫걸음</h1>
         <p className="lead">
           자전거를 처음 타는 사람을 위한 앱이에요.
