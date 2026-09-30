@@ -25,6 +25,9 @@
   부품·고장·수업 아이콘은 `src/data/*.ts`의 `icon`에 있어요. 네모 칸은 `IconTile`(`src/components/ui.tsx`)이에요.
 - 아래 탭 막대 (M3 navigation bar): 탭 1개는 늘 켜져 있어요 (설정 화면 = 홈). 지금 탭을 다시 누르면 맨 위로 올라가요.
 - 부품 막대 (Geist Progress): 막대 옆에 "약 N km 남았어요" 글을 둬요. 막대 이름에 부품 이름을 넣어요.
+- 3D 자전거 (`src/components/bike3d/`, 부품 화면 맨 위): three.js + @react-three/fiber. 바깥 모델 파일 없이 기본 모양으로 만들어요.
+  색은 ink·hairline 계열만 써요. 부품 점 자리는 `src/data/bikeHotspots.ts`에 있어요. 부품을 더하면 점 자리도 더해요 (테스트가 확인해요).
+  3D 코드는 lazy load해요. WebGL이 없거나 오류가 나면 칸을 숨겨요. 움직임 줄이기면 혼자 돌지 않아요.
 - 로고: `public/logo.webp` (사용자가 준 그림). 앱 아이콘 PNG(`icon-192`, `icon-512`, `apple-touch-icon`, `favicon`)는 이 그림으로 만들었어요.
   로고의 초록·갈색은 로고 안에서만 써요. UI 색으로 쓰지 마세요.
 - 모션: kinetics.colorion.co에서 가져왔어요. 곡선은 `--ease-glide` 1개만 써요 (튕기는 곡선은 쓰지 않아요).

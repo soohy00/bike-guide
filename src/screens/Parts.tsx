@@ -7,6 +7,7 @@ import { popularFor } from '../data/popularParts';
 import { TROUBLES } from '../data/troubles';
 import { allPartHealth, byUrgency, partHealth, statusLabel, totalKm } from '../lib/maintenance';
 import { go } from '../lib/router';
+import BikeViewer from '../components/bike3d';
 import { Check } from 'lucide-react';
 import { Card, Chevron, DiyBadge, IconTile, LeftKm, StatusPill, TopBar, WearBar, km } from '../components/ui';
 
@@ -15,6 +16,7 @@ export function PartList({ state }: { state: AppState }) {
   return (
     <div className="stack stagger">
       <TopBar title="부품" />
+      <BikeViewer health={list} />
       <p className="muted">막대가 가득 차면 바꿀 때예요. 부품을 누르면 자세히 봐요.</p>
       {list.map((h) => (
         <Card key={h.part.id} onClick={() => go(`/parts/${h.part.id}`)}>

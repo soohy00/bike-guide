@@ -484,6 +484,108 @@ input {
   background: var(--status-now);
 }
 
+/* 3D 자전거 (부품 화면 맨 위).
+   DESIGN.md product-screenshot-card: surface-1, rounded.xl 16px. */
+.bike3d-card {
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-xl);
+  box-shadow: var(--edge);
+  overflow: hidden;
+}
+
+.bike3d {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  cursor: grab;
+  /* 위아래로 밀면 화면이 움직이고, 옆으로 밀면 자전거가 돌아요 */
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.bike3d:active {
+  cursor: grabbing;
+}
+
+.bike3d-canvas {
+  position: absolute !important;
+  inset: 0;
+}
+
+.bike3d-hint {
+  margin: 0;
+  padding: 0 var(--s-md) var(--s-md);
+}
+
+/* 부품 점: 누르는 칸은 36px, 보이는 점은 12px.
+   상태 색은 작은 점에만 써요 (CLAUDE.md). */
+.hotspot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  border-radius: 50%;
+  will-change: transform;
+}
+
+.hotspot-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 2px var(--surface-1),
+    0 0 0 3px var(--ink-muted);
+  transition: box-shadow 0.15s;
+}
+
+.hotspot-dot.ok {
+  background: var(--status-ok);
+}
+.hotspot-dot.soon {
+  background: var(--status-soon);
+}
+.hotspot-dot.now {
+  background: var(--status-now);
+}
+
+.hotspot:hover .hotspot-dot {
+  box-shadow:
+    0 0 0 2px var(--surface-1),
+    0 0 0 3px var(--ink);
+}
+
+/* 이름표: 마우스를 올리거나 키보드로 고르면 보여요 (status-badge 모양) */
+.hotspot-label {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 2px var(--s-xs);
+  border-radius: var(--r-pill);
+  background: var(--surface-2);
+  border: 1px solid var(--hairline-strong);
+  color: var(--ink-muted);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.hotspot:hover .hotspot-label,
+.hotspot:focus-visible .hotspot-label {
+  opacity: 1;
+}
+
 /* status-badge + 상태 점 */
 .pill {
   display: inline-flex;
